@@ -1,7 +1,7 @@
 const express = require('express')
 const mongodb = require('mongodb')
 const db = require('../data/database')
-const objectId = mongodb.ObjectId
+const objectify = mongodb.ObjectId
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -19,11 +19,14 @@ router.get('/new-post', async (req, res) => {
 })
 
 router.post('/new-post', async (req, res) => {
-  const authorId = new objectId(req.body.author)
-  const author = await db.getDb().collection('authors').findOne({
-    _id: authorId
-  })
+  const authorId = req.body.author
+  const author = await db.getDb()
+    .collection('authors')
+    .findOne({ _id: authorId })
 
+  console.log(author)
+
+try{ 
   const newPost = {
     title: req.body.title,
     summary: req.body.summary,
@@ -35,10 +38,17 @@ router.post('/new-post', async (req, res) => {
     }
   }
 
-  const result = await db.getDb().collection('posts').insertOne(newPost)
-  console.log(result)
 
+  const result = await db.getDb()
+  .collection('posts')
+  .insertOne(newPost)
+
+  console.log(result)
+}catch(err){
+  console.log(err)
+}finally{
   res.redirect('/posts')
+}
 })
 
 module.exports = router
