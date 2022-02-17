@@ -36,12 +36,29 @@ router.post('/new-post', async (req, res) => {
       }
     }
     const result = await db.getDb().collection('posts').insertOne(newPost)
-    console.log(result)
   }catch(err){
     console.log(err)
   }finally{
   res.redirect('/posts')
   }
+})
+
+router.get('/detailPost/:id', async(req, res)=>{
+  let post
+  try{
+    const postId = (req.params.id).trim()
+    const post_id = new ObjectId(postId)
+    post = await db.getDb().collection('posts').findOne({ _id: post_id })
+  }catch{
+
+  }
+
+  if(!post){
+    return res.status(404).render('404')
+  }
+  res.render('post-detail',{
+    post:post
+  })
 })
 
 module.exports = router
