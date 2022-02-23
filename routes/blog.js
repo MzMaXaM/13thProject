@@ -97,4 +97,25 @@ router.post('/updatePost/:id', async (req, res) => {
   res.redirect('/posts')
 })
 
+router.get('/posts/:id/comments', async (req, res) => {
+  const postId = (req.params.id).trim()
+  const comments = await db.getDb()
+    .collection('comments')
+    .find({ postId: postId }).toArray()
+
+  res.json(comments)
+})
+
+router.post('/posts/:id/comments', async (req, res) => {
+  const postId = (req.params.id).trim()
+  const newComment = {
+    postId: postId,
+    title: req.body.title,
+    text: req.body.text
+  }
+  await db.getDb()
+    .collection('comments')
+    .insertOne(newComment)
+})
+
 module.exports = router
