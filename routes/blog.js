@@ -1,4 +1,5 @@
 const express = require('express')
+const res = require('express/lib/response')
 const db = require('../data/database')
 const ObjectId = require('mongodb').ObjectId
 const router = express.Router()
@@ -94,6 +95,12 @@ router.post('/updatePost/:id', async (req, res) => {
     post = await db.getDb().collection('posts').updateOne({ _id: post_id }, updatedPost, null)
   } catch (err) { console.log(err) }
 
+  res.redirect('/posts')
+})
+
+router.post('/posts/:id/delete', async (req, res) => {
+  const postId = new ObjectId((req.params.id).trim())
+  db.getDb().collection('posts').deleteOne({ _id: postId })
   res.redirect('/posts')
 })
 
