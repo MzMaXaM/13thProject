@@ -13,6 +13,9 @@
       <h1>
         <%= post.title %>
       </h1>
+      <p>
+        <%= post._id %>
+      </p>
       <section id="post-meta">
         <address>
           <a href="mailto:<%= post.authorEmail %> ">
@@ -30,9 +33,11 @@
         </p>
       </section>
     </main>
-    <section id="comments">
-      <button class="btn" id="loadCommentsBtn" data-postid="<%= post._id %>">
-        load comments
+    <section id="commentsSection">
+      <button class="btn btn-alt" 
+      id="loadCommentsBtn" 
+      data-postid="<%= post._id %>">
+        Load comments
       </button>
     </section>
     <section id="commentsForm">
@@ -46,7 +51,7 @@
           <label for="text">Your comment</label>
           <textarea name="text" id="text" rows="3" required></textarea>
         </div>
-        <button class="btn" data-postid="<%= post._id %> ">Save Comment</button>
+        <button class="btn" data-postid="<%= post._id %>">Save Comment</button>
       </form>
     </section>
 </body>
