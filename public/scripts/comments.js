@@ -1,15 +1,14 @@
-const loadCommentsBtn = document.getElementById('loadCommentsBtn'),
-  formSubmit = document.querySelector('#commentsForm form button'),
-  titleInput = document.getElementById('title'),
-  textInput = document.getElementById('text'),
-  commentsSection = document.getElementById('commentsSection')
+const 
+  loadCommentsBtn = document.getElementById('loadCommentsBtn'),
+  formSubmit = document.querySelector('#commentsForm form button')
 
 loadCommentsBtn.addEventListener('click', fetchComments)
 formSubmit.addEventListener('click', saveComment)
 
 async function fetchComments() {
-  let postId = loadCommentsBtn.dataset.postid
-  console.log(`%c${postId}`, 'color: #7F95D1')
+  const postId = loadCommentsBtn.dataset.postid,
+  commentsSection = document.getElementById('commentsSection')
+  // console.log(`%c${postId}`, 'color: #7F95D1')
 
   const res = await fetch(`/posts/${postId}/comments`)
   const data = await res.json()
@@ -37,9 +36,11 @@ function writeComments(arr) {
 
 async function saveComment(event) {
   event.preventDefault()
-  const postId = formSubmit.dataset.postid
-  const title = titleInput.value
-  const text = textInput.value
+  const postId = formSubmit.dataset.postid,
+  titleInput = document.getElementById('title'),
+  textInput = document.getElementById('text'),
+  title = titleInput.value,
+  text = textInput.value
   // console.log(`%c${postId}`, 'color: #7F95D1')
 
   const comment = {

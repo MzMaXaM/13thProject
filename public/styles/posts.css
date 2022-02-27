@@ -52,5 +52,21 @@
 }
 
 #body {
-  white-space: pre-wrap; /* This ensures that line breaks and whitespace are kept */
+  white-space: pre-wrap;
+  /* This ensures that line breaks and whitespace are kept */
+}
+
+.comment-item {
+  border: 1px outset;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 4px 4px 8px rgba(150, 150, 150, 0.8);
+}
+
+#commentsForm {
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
 }

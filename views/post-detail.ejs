@@ -34,15 +34,13 @@
       </section>
     </main>
     <section id="commentsSection">
-      <button class="btn btn-alt" 
-      id="loadCommentsBtn" 
-      data-postid="<%= post._id %>">
-        Load comments
-      </button>
     </section>
     <section id="commentsForm">
+      <button class="btn btn-alt" id="loadCommentsBtn" data-postid="<%= post._id %>">
+        Load comments
+      </button>
       <h2>Leave a comment</h2>
-      <form action="">
+      <form>
         <div class="form-control">
           <label for="title">Comment title</label>
           <input type="text" id="title" name="title" required />
